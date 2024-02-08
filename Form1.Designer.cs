@@ -37,8 +37,9 @@ namespace ExploradorWeb
             this.botonir = new System.Windows.Forms.Button();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.colorDialog1 = new System.Windows.Forms.ColorDialog();
-            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
+            this.webView21 = new Microsoft.Web.WebView2.WinForms.WebView2();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.webView21)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -48,7 +49,7 @@ namespace ExploradorWeb
             this.nAVEGARToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1295, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1346, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -87,9 +88,9 @@ namespace ExploradorWeb
             // botonir
             // 
             this.botonir.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.botonir.Location = new System.Drawing.Point(650, 50);
+            this.botonir.Location = new System.Drawing.Point(1175, 31);
             this.botonir.Name = "botonir";
-            this.botonir.Size = new System.Drawing.Size(75, 23);
+            this.botonir.Size = new System.Drawing.Size(84, 32);
             this.botonir.TabIndex = 1;
             this.botonir.Text = "Ir";
             this.botonir.UseVisualStyleBackColor = true;
@@ -99,28 +100,34 @@ namespace ExploradorWeb
             // 
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
-            "http://google.com",
-            "http//yahoo.com",
-            "http://gmail.com"});
-            this.comboBox1.Location = new System.Drawing.Point(12, 49);
+            "https://google.com",
+            "https://yahoo.com",
+            "https://gmail.com"});
+            this.comboBox1.Location = new System.Drawing.Point(26, 31);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(610, 24);
+            this.comboBox1.Size = new System.Drawing.Size(1104, 24);
             this.comboBox1.TabIndex = 2;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
-            // webBrowser1
+            // webView21
             // 
-            this.webBrowser1.Location = new System.Drawing.Point(12, 89);
-            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(1115, 561);
-            this.webBrowser1.TabIndex = 3;
+            this.webView21.AllowExternalDrop = true;
+            this.webView21.CreationProperties = null;
+            this.webView21.DefaultBackgroundColor = System.Drawing.Color.White;
+            this.webView21.Location = new System.Drawing.Point(26, 70);
+            this.webView21.Name = "webView21";
+            this.webView21.Size = new System.Drawing.Size(1298, 611);
+            this.webView21.Source = new System.Uri("https://google.com", System.UriKind.Absolute);
+            this.webView21.TabIndex = 3;
+            this.webView21.ZoomFactor = 1D;
+            this.webView21.Click += new System.EventHandler(this.webView21_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1295, 662);
-            this.Controls.Add(this.webBrowser1);
+            this.ClientSize = new System.Drawing.Size(1346, 710);
+            this.Controls.Add(this.webView21);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.botonir);
             this.Controls.Add(this.menuStrip1);
@@ -130,6 +137,7 @@ namespace ExploradorWeb
             this.Load += new System.EventHandler(this.Form1_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.webView21)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -145,7 +153,7 @@ namespace ExploradorWeb
         private System.Windows.Forms.Button botonir;
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.ColorDialog colorDialog1;
-        private System.Windows.Forms.WebBrowser webBrowser1;
+        private Microsoft.Web.WebView2.WinForms.WebView2 webView21;
     }
 }
 
