@@ -49,7 +49,7 @@ namespace ExploradorWeb
             this.nAVEGARToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1346, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1344, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -100,9 +100,7 @@ namespace ExploradorWeb
             // 
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Items.AddRange(new object[] {
-            "https://google.com",
-            "https://yahoo.com",
-            "https://gmail.com"});
+            "."});
             this.comboBox1.Location = new System.Drawing.Point(26, 31);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(1104, 24);
@@ -126,7 +124,7 @@ namespace ExploradorWeb
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1346, 710);
+            this.ClientSize = new System.Drawing.Size(1344, 775);
             this.Controls.Add(this.webView21);
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.botonir);
