@@ -15,6 +15,8 @@ namespace ExploradorWeb
 {
     public partial class Form1 : Form
     {
+
+        private List<URL> historial = new List<URL>();
         public Form1()
         {
             InitializeComponent();
@@ -67,27 +69,103 @@ namespace ExploradorWeb
 
         }
 
+        
+
+        private void AgregarURL(string direccion)
+        {
+            // Busca si la URL ya existe en el historial
+            URL urlExistente = historial.FirstOrDefault(u => u.Pagina == direccion);
+
+            if (urlExistente != null)
+            {
+                // Si existe, actualiza su contador y fecha de acceso
+                urlExistente.Veces++;
+                urlExistente.Fecha= DateTime.Now;
+            }
+            else
+            {
+                // Si no existe, la agrega al historial
+                historial.Add(new URL
+                {
+                    Pagina = direccion,
+                    Veces = 1,
+                    Fecha = DateTime.Now
+                });
+            }
+        }
+
+
+        private void GuardarHistorial()
+        {
+            // Ordena el historial por fecha de último acceso (más reciente primero)
+            historial = historial.OrderByDescending(u => u.Fecha).ToList();
+
+            // Escribe el historial en el archivo de texto
+            using (StreamWriter writer = new StreamWriter(@"C:\Users\Diego Cardona\source\repos\ExploradorWeb\H\historial.txt"))
+            {
+                foreach (URL url in historial)
+                {
+                    writer.WriteLine($"{url.Pagina},{url.Veces},{url.Fecha}");
+                }
+            }
+        }
+
+       
+
+        private void CargarHistorial()
+        {
+            historial.Clear();
+
+
+            // Lee el historial
+            using (StreamReader reader = new StreamReader(@"C:\Users\Diego Cardona\source\repos\ExploradorWeb\H\historial.txt"))
+            {
+                string line;
+                while ((line = reader.ReadLine()) != null)
+                {
+                    string[] parts = line.Split('\t');
+                    historial.Add(new URL
+                    {
+                        Pagina = parts[0],
+                        Veces = int.Parse(parts[1]),
+                        Fecha = DateTime.Parse(parts[2])
+                    });
+                }
+            }
+
+        }
+        /*
+            private void OrdenarPorVecesAccedida()
+        {
+            historial = historial.OrderByDescending(u => u.Veces).ToList();
+            // Guardar historial después de ordenarlo
+            GuardarHistorial();
+        }
+        */
+
+        /*
+        private void OrdenarPorFechaAcceso()
+        {
+            historial = historial.OrderByDescending(u => u.Fecha).ToList();
+            // Guardar historial después de ordenarlo
+            GuardarHistorial();
+        }
+        */
         private void botonir_Click(object sender, EventArgs e)
         {
-
             string direccion = comboBox1.Text.Trim();
 
             if (webView21 != null && webView21.CoreWebView2 != null)
             {
-
                 if (!direccion.Contains("."))
                 {
-
                     direccion = "https://www.google.com/search?q=" + Uri.EscapeDataString(direccion);
-                    webView21.CoreWebView2.Navigate(direccion);
                 }
 
                 webView21.CoreWebView2.Navigate(direccion);
-                Guardar(@"C:\Users\Diego Cardona\source\repos\ExploradorWeb\H\historial.txt", comboBox1.Text);
-
-                
+                AgregarURL(direccion); // Agrega la URL al historial
+                GuardarHistorial(); // Guarda el historial actualizado en el archivo de texto
             }
-
         }
 
         private void read()
@@ -156,9 +234,23 @@ namespace ExploradorWeb
 
         }
 
-        
-        
+        private void button1_Click(object sender, EventArgs e)
+        {
+            
+                historial = historial.OrderByDescending(u => u.Veces).ToList();
+                // Guardar historial después de ordenarlo
+                GuardarHistorial();
+            
+        }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+           
+                historial = historial.OrderByDescending(u => u.Fecha).ToList();
+                GuardarHistorial();
+            
+
+        }
     }
 
 
