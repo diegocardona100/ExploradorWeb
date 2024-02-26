@@ -168,6 +168,8 @@ namespace ExploradorWeb
             }
         }
 
+
+
         private void read()
         {
             FileStream stream = new FileStream(@"C:\Users\Diego Cardona\source\repos\ExploradorWeb\H\historial.txt", FileMode.Open, FileAccess.Read);
@@ -248,7 +250,7 @@ namespace ExploradorWeb
            
                 historial = historial.OrderByDescending(u => u.Fecha).ToList();
                 GuardarHistorial();
-            
+
 
         }
     }
