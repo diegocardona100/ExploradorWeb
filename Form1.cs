@@ -105,8 +105,23 @@ namespace ExploradorWeb
             {
                 foreach (URL url in historial)
                 {
-                    writer.WriteLine($"{url.Pagina}-{url.Veces}-{url.Fecha}");
+                    writer.WriteLine($"{url.Pagina}");
+                    URL n1 = new URL();
+                    n1.Pagina = url.Pagina;
+                    n1.Veces = url.Veces;
+                    n1.Fecha = url.Fecha;
+
+                    historial.Add(n1);
+
+
                 }
+                /*
+                comboBox1.DisplayMember = "Pagina";
+                comboBox1.DataSource = historial;
+
+                comboBox1.Refresh();
+
+                */
             }
         }
 
