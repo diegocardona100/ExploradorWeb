@@ -98,14 +98,14 @@ namespace ExploradorWeb
         private void GuardarHistorial()
         {
             // Ordena el historial por fecha de último acceso (más reciente primero)
-            historial = historial.OrderByDescending(u => u.Fecha).ToList();
+            //historial = historial.OrderByDescending(u => u.Fecha).ToList();
 
             // Escribe el historial en el archivo de texto
             using (StreamWriter writer = new StreamWriter(@"C:\Users\Diego Cardona\source\repos\ExploradorWeb\H\historial.txt"))
             {
                 foreach (URL url in historial)
                 {
-                    writer.WriteLine($"{url.Pagina},{url.Veces},{url.Fecha}");
+                    writer.WriteLine($"{url.Pagina}-{url.Veces}-{url.Fecha}");
                 }
             }
         }
@@ -114,16 +114,14 @@ namespace ExploradorWeb
 
         private void CargarHistorial()
         {
-            historial.Clear();
-
-
+            //historial.Clear();
             // Lee el historial
             using (StreamReader reader = new StreamReader(@"C:\Users\Diego Cardona\source\repos\ExploradorWeb\H\historial.txt"))
             {
                 string line;
                 while ((line = reader.ReadLine()) != null)
                 {
-                    string[] parts = line.Split('\t');
+                    string[] parts = line.Split(',');
                     historial.Add(new URL
                     {
                         Pagina = parts[0],
@@ -134,23 +132,24 @@ namespace ExploradorWeb
             }
 
         }
-        /*
+        
             private void OrdenarPorVecesAccedida()
         {
             historial = historial.OrderByDescending(u => u.Veces).ToList();
             // Guardar historial después de ordenarlo
             GuardarHistorial();
         }
-        */
+        
 
-        /*
+        
+
         private void OrdenarPorFechaAcceso()
         {
             historial = historial.OrderByDescending(u => u.Fecha).ToList();
             // Guardar historial después de ordenarlo
             GuardarHistorial();
         }
-        */
+        
         private void botonir_Click(object sender, EventArgs e)
         {
             string direccion = comboBox1.Text.Trim();
@@ -238,20 +237,24 @@ namespace ExploradorWeb
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
+            OrdenarPorVecesAccedida();
+            /*
                 historial = historial.OrderByDescending(u => u.Veces).ToList();
                 // Guardar historial después de ordenarlo
                 GuardarHistorial();
-            
+            */
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-           
+
+            OrdenarPorFechaAcceso();
+
+           /*
                 historial = historial.OrderByDescending(u => u.Fecha).ToList();
                 GuardarHistorial();
 
-
+            */
         }
     }
 
